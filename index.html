@@ -1,0 +1,688 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LLM & GenAI Projects | Shambhavi Srivastavv</title>
+
+    <meta name="description"
+          content="A collection of LLM and Generative AI projects exploring RAG, LangChain, vector databases, embeddings and LLM applications.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #f7f7f5;
+            --card: #ffffff;
+            --text: #18181b;
+            --muted: #66666f;
+            --border: #e5e5e5;
+            --accent: #4f46e5;
+            --accent-light: #eef2ff;
+        }
+
+        body {
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1080px, 90%);
+            margin: auto;
+        }
+
+        /* ---------- HERO ---------- */
+
+        header {
+            padding: 90px 0 65px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(42px, 7vw, 72px);
+            line-height: 1.05;
+            letter-spacing: -3px;
+            max-width: 800px;
+            margin-bottom: 22px;
+        }
+
+        .hero-text {
+            max-width: 720px;
+            font-size: 18px;
+            color: var(--muted);
+        }
+
+        .hero-meta {
+            margin-top: 28px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        /* ---------- SECTION ---------- */
+
+        section {
+            padding: 70px 0;
+        }
+
+        .section-title {
+            font-size: 28px;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+
+        .section-description {
+            color: var(--muted);
+            max-width: 700px;
+            margin-bottom: 35px;
+        }
+
+        /* ---------- PROJECTS ---------- */
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .project {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 32px;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .project:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+        }
+
+        .project-number {
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+        }
+
+        .project h3 {
+            font-size: 25px;
+            letter-spacing: -0.8px;
+            margin-bottom: 10px;
+        }
+
+        .project-subtitle {
+            color: var(--muted);
+            font-size: 15px;
+            margin-bottom: 22px;
+        }
+
+        .project-description {
+            font-size: 15px;
+            color: #45454d;
+            margin-bottom: 25px;
+        }
+
+        /* ---------- FEATURES ---------- */
+
+        .features {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+
+        .features li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 9px;
+            font-size: 14px;
+            color: #45454d;
+        }
+
+        .features li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* ---------- TAGS ---------- */
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 28px;
+        }
+
+        .tag {
+            background: #f1f1f1;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #4b4b52;
+        }
+
+        /* ---------- BUTTONS ---------- */
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .button.primary {
+            background: var(--text);
+            color: white;
+            border-color: var(--text);
+        }
+
+        .button.primary:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* ---------- WORKFLOW ---------- */
+
+        .workflow {
+            background: #18181b;
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            overflow-x: auto;
+        }
+
+        .workflow-title {
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        .pipeline {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 750px;
+        }
+
+        .step {
+            background: #27272a;
+            border: 1px solid #3f3f46;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .arrow {
+            color: #a1a1aa;
+        }
+
+        /* ---------- TECH ---------- */
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .tech {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 18px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* ---------- ABOUT ---------- */
+
+        .about {
+            max-width: 760px;
+            font-size: 17px;
+            color: var(--muted);
+        }
+
+        .about strong {
+            color: var(--text);
+        }
+
+        /* ---------- FOOTER ---------- */
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 30px 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+
+        @media (max-width: 800px) {
+
+            header {
+                padding: 60px 0 45px;
+            }
+
+            h1 {
+                letter-spacing: -2px;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .workflow {
+                padding: 25px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= HERO ================= -->
+
+<header>
+    <div class="container">
+
+        <span class="eyebrow">LLM • GENERATIVE AI • APPLIED AI</span>
+
+        <h1>
+            LLM &amp;<br>
+            GenAI Projects
+        </h1>
+
+        <p class="hero-text">
+            A collection of practical AI applications exploring
+            Retrieval-Augmented Generation, LangChain, embeddings,
+            vector databases and LLM-powered workflows.
+        </p>
+
+        <div class="hero-meta">
+            <span>Python</span>
+            <span>•</span>
+            <span>LangChain</span>
+            <span>•</span>
+            <span>RAG</span>
+            <span>•</span>
+            <span>Vector Search</span>
+            <span>•</span>
+            <span>LLMs</span>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- ================= PROJECTS ================= -->
+
+<section>
+    <div class="container">
+
+        <h2 class="section-title">Projects</h2>
+
+        <p class="section-description">
+            Two LLM-based applications demonstrating how external
+            information can be processed, retrieved and used to
+            generate context-aware responses.
+        </p>
+
+
+        <div class="projects">
+
+            <!-- STUDENT PROFILE ANALYSER -->
+
+            <article class="project">
+
+                <div class="project-number">01 / AI CAREER ASSISTANT</div>
+
+                <h3>Student Profile Analyser</h3>
+
+                <p class="project-subtitle">
+                    AI-powered profile analysis &amp; personalized
+                    career assistance.
+                </p>
+
+                <p class="project-description">
+                    Analyses a student's profile and extracts relevant
+                    information such as education, skills, projects
+                    and experience. The system can use this information
+                    to generate personalized outputs, including
+                    company-specific cover letters based on the
+                    requirements of a target role.
+                </p>
+
+                <ul class="features">
+                    <li>Analyses student profile documents</li>
+                    <li>Extracts skills, experience and projects</li>
+                    <li>Uses semantic retrieval for relevant information</li>
+                    <li>Generates personalized profile insights</li>
+                    <li>Creates company-specific cover letters</li>
+                    <li>Uses LLMs for contextual generation</li>
+                </ul>
+
+                <div class="tags">
+                    <span class="tag">LangChain</span>
+                    <span class="tag">RAG</span>
+                    <span class="tag">LLM</span>
+                    <span class="tag">Embeddings</span>
+                    <span class="tag">Vector DB</span>
+                    <span class="tag">NLP</span>
+                    <span class="tag">Gradio</span>
+                </div>
+
+                <div class="buttons">
+
+                    <!-- REPLACE THESE LINKS -->
+
+                    <a
+                        href="YOUR_GITHUB_PROFILE_ANALYSER_FOLDER_LINK"
+                        class="button primary"
+                        target="_blank">
+                        View Project
+                    </a>
+
+                    <a
+                        href="YOUR_COLAB_PROFILE_ANALYSER_LINK"
+                        class="button"
+                        target="_blank">
+                        Open in Colab ↗
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- PDF CHATBOT -->
+
+            <article class="project">
+
+                <div class="project-number">02 / DOCUMENT INTELLIGENCE</div>
+
+                <h3>PDF Chatbot</h3>
+
+                <p class="project-subtitle">
+                    Ask questions and retrieve answers directly
+                    from PDF documents.
+                </p>
+
+                <p class="project-description">
+                    A Retrieval-Augmented Generation application that
+                    processes PDF documents, splits them into meaningful
+                    chunks, creates embeddings and stores them for
+                    semantic retrieval. Users can then ask natural
+                    language questions and receive answers grounded
+                    in the uploaded document.
+                </p>
+
+                <ul class="features">
+                    <li>Upload and process PDF documents</li>
+                    <li>Extract and preprocess document text</li>
+                    <li>Chunk and tokenize large documents</li>
+                    <li>Generate semantic embeddings</li>
+                    <li>Perform vector similarity search</li>
+                    <li>Generate context-grounded answers with an LLM</li>
+                </ul>
+
+                <div class="tags">
+                    <span class="tag">RAG</span>
+                    <span class="tag">LangChain</span>
+                    <span class="tag">Embeddings</span>
+                    <span class="tag">Vector DB</span>
+                    <span class="tag">PDF Processing</span>
+                    <span class="tag">Groq</span>
+                    <span class="tag">Gemini</span>
+                    <span class="tag">Gradio</span>
+                </div>
+
+                <div class="buttons">
+
+                    <!-- REPLACE THESE LINKS -->
+
+                    <a
+                        href="YOUR_GITHUB_PDF_CHATBOT_FOLDER_LINK"
+                        class="button primary"
+                        target="_blank">
+                        View Project
+                    </a>
+
+                    <a
+                        href="YOUR_COLAB_PDF_CHATBOT_LINK"
+                        class="button"
+                        target="_blank">
+                        Open in Colab ↗
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= RAG WORKFLOW ================= -->
+
+<section>
+
+    <div class="container">
+
+        <h2 class="section-title">The RAG Pipeline</h2>
+
+        <p class="section-description">
+            Both projects explore the core workflow behind modern
+            retrieval-based LLM applications.
+        </p>
+
+        <div class="workflow">
+
+            <h3 class="workflow-title">
+                From information → retrieval → generation
+            </h3>
+
+            <div class="pipeline">
+
+                <div class="step">Document / Profile</div>
+
+                <span class="arrow">→</span>
+
+                <div class="step">Text Extraction</div>
+
+                <span class="arrow">→</span>
+
+                <div class="step">Chunking</div>
+
+                <span class="arrow">→</span>
+
+                <div class="step">Embeddings</div>
+
+                <span class="arrow">→</span>
+
+                <div class="step">Vector Store</div>
+
+                <span class="arrow">→</span>
+
+                <div class="step">Semantic Retrieval</div>
+
+                <span class="arrow">→</span>
+
+                <div class="step">LLM</div>
+
+                <span class="arrow">→</span>
+
+                <div class="step">Response</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TECHNOLOGY ================= -->
+
+<section>
+
+    <div class="container">
+
+        <h2 class="section-title">Technology</h2>
+
+        <p class="section-description">
+            Tools and concepts used across the projects.
+        </p>
+
+        <div class="tech-grid">
+
+            <div class="tech">Python</div>
+            <div class="tech">LangChain</div>
+            <div class="tech">RAG</div>
+            <div class="tech">LLMs</div>
+
+            <div class="tech">Embeddings</div>
+            <div class="tech">Vector DB</div>
+            <div class="tech">NLP</div>
+            <div class="tech">Tokenization</div>
+
+            <div class="tech">Prompt Engineering</div>
+            <div class="tech">Groq</div>
+            <div class="tech">Google Gemini</div>
+            <div class="tech">Gradio</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section>
+
+    <div class="container">
+
+        <h2 class="section-title">About the Work</h2>
+
+        <p class="about">
+
+            These projects were developed to explore the practical
+            engineering of <strong>LLM-powered applications</strong>
+            beyond simple model prompting. The implementations focus
+            on connecting language models with external information
+            through <strong>document processing, embeddings, vector
+            retrieval and RAG pipelines</strong>.
+
+            <br><br>
+
+            The goal is to build systems where an LLM can work with
+            relevant user-provided information and produce useful,
+            context-aware outputs.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-inner">
+
+            <span>
+                © 2026 Shambhavi Srivastavv
+            </span>
+
+            <span>
+                LLMs · RAG · Generative AI
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
+```
